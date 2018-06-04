@@ -3,6 +3,7 @@ package com.jarvan.dagger2demo.di.module;
 import android.app.Application;
 
 import dagger.Module;
+import dagger.Provides;
 
 /**
  * 创建日期：2018/6/4 on 下午4:00
@@ -16,5 +17,10 @@ public class AppModule {
 
     public AppModule(Application application){
 
+    }
+
+    @Provides
+    public Application provideApplicaiton(){
+        return mApplication;
     }
 }
