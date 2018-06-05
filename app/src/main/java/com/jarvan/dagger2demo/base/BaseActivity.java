@@ -3,6 +3,7 @@ package com.jarvan.dagger2demo.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import com.jarvan.dagger2demo.R;
@@ -25,6 +26,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
         View rootView = View.inflate(this, R.layout.activity_base, null);
         final FrameLayout flContent = (FrameLayout) rootView.findViewById(R.id.fl_content);
+        if (hasToolbarTitle()) {
+            ViewStub viewStub = (ViewStub) rootView.findViewById(R.id.vs_toolbar);
+            viewStub.inflate();
+        }
         View content = View.inflate(this, getLayoutId(), null);
         if (content != null) {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(

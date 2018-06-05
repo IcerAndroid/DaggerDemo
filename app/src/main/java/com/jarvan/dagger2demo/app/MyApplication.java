@@ -15,17 +15,23 @@ import com.jarvan.dagger2demo.di.module.NetworkModule;
 public class MyApplication extends Application {
 
     private AppComponent mAppComponent;
+    private static MyApplication application;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        application = this;
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .networkModule(new NetworkModule())
                 .build();
     }
 
-    public AppComponent getAppComponent(){
+    public static MyApplication getApplication() {
+        return application;
+    }
+
+    public AppComponent getAppComponent() {
         return mAppComponent;
     }
 }
