@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.jarvan.dagger2demo.R;
 import com.jarvan.dagger2demo.base.BaseFragment;
+import com.jarvan.dagger2demo.ui.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ public class GankIoTabFragment extends BaseFragment {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private ViewPagerAdapter mViewPagerAdapter;
 
     @Override
     protected int getlayoutId() {
@@ -31,8 +33,6 @@ public class GankIoTabFragment extends BaseFragment {
     protected void initView(View view) {
         mTabLayout = view.findViewById(R.id.tab_layout);
         mViewPager = view.findViewById(R.id.view_pager);
-
-
     }
 
     @Override
@@ -44,7 +44,15 @@ public class GankIoTabFragment extends BaseFragment {
     protected void initData() {
         final List<String> titleList = Arrays.asList("今日干货", "分类", "福利");
         final List<Fragment> fragmentList = new ArrayList<>(titleList.size());
-
+        fragmentList.add(new TodayFragment());
+        fragmentList.add(new TodayFragment());
+        fragmentList.add(new TodayFragment());
+        mViewPagerAdapter = new ViewPagerAdapter(getFragmentManager(), titleList,
+                fragmentList);
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOffscreenPageLimit(fragmentList.size() - 1);
+        mViewPager.setCurrentItem(0);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override

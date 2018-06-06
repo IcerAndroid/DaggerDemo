@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
-import com.trello.rxlifecycle2.components.RxFragment;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * 创建日期：2018/6/5 on 上午11:28
  * 描述:
  * 作者:张冰
  */
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment extends RxFragment implements BaseView {
 
     protected LoadService loadService;
 
@@ -24,8 +25,9 @@ public abstract class BaseFragment extends RxFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView=View.inflate(getActivity(),getlayoutId(),null);
-        loadService = LoadSir.getDefault().register(rootView, (Callback.OnReloadListener) this::onNetReload);
+        View rootView = View.inflate(getActivity(), getlayoutId(), null);
+        loadService = LoadSir.getDefault().register(rootView,
+                (Callback.OnReloadListener) this::onNetReload);
         return loadService.getLoadLayout();
     }
 
@@ -33,7 +35,7 @@ public abstract class BaseFragment extends RxFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        if(!islazy()){
+        if (!islazy()) {
             loadNet();
             initData();
         }
@@ -41,7 +43,6 @@ public abstract class BaseFragment extends RxFragment {
 
     /**
      * 是否懒加载
-     * @return
      */
     protected boolean islazy() {
         return false;
@@ -57,4 +58,8 @@ public abstract class BaseFragment extends RxFragment {
 
     protected abstract void onNetReload(View v);
 
+    @Override
+    public <T> LifecycleTransformer<T> bindToLife() {
+        return super.bindToLifecycle();
+    }
 }

@@ -24,7 +24,7 @@
         android:background="?android:attr/windowBackground"
         app:layout_anchor="@id/frame_layout"
         app:layout_anchorGravity="bottom"
-        app:layout_behavior="me.wangzheng.gankio.util.BottomNavigationBehavior"
+        app:layout_behavior="com.jarvan.dagger2demo.util.BottomNavigationBehavior"
         app:menu="@menu/navigation"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -110,4 +110,8 @@ public class GankEntity {
     public void setImages(List<String> images) {
         this.images = images;
     }
+
+    public String getCategory() {
+        return category;
+    }
 }

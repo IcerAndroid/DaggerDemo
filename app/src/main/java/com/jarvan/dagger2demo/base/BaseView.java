@@ -10,6 +10,6 @@ public interface BaseView {
      * @param <T>
      * @return
      */
-    <T> LifecycleTransformer<T> bindToLife();
+     <T> LifecycleTransformer<T> bindToLife();
 
 }
