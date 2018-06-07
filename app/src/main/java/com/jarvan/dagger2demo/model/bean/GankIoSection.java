@@ -1,5 +1,7 @@
 package com.jarvan.dagger2demo.model.bean;
 
+import android.text.TextUtils;
+
 import com.chad.library.adapter.base.entity.SectionEntity;
 
 /**
@@ -8,11 +10,9 @@ import com.chad.library.adapter.base.entity.SectionEntity;
  * 作者:张冰
  */
 public class GankIoSection extends SectionEntity<GankEntity> {
-    public GankIoSection(boolean isHeader, String header) {
-        super(isHeader, header);
-    }
-
     public GankIoSection(GankEntity gankEntity) {
         super(gankEntity);
+        header= gankEntity.getCategory();
+        isHeader=!TextUtils.isEmpty(gankEntity.getCategory());
     }
 }

@@ -1,6 +1,7 @@
 package com.jarvan.dagger2demo.contract;
 
 import com.jarvan.dagger2demo.base.BaseView;
+import com.jarvan.dagger2demo.model.bean.GankIoSection;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface GankIoContract {
 
     interface View extends BaseView{
 
-        void onResultGankIoList(List list);
+        void onResultGankIoList(List<GankIoSection> list);
 
         void onResultHistoryList(List<String> list);
 

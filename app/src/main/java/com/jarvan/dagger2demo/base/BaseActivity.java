@@ -35,13 +35,12 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
             flContent.addView(content, params);
-            loadService = LoadSir.getDefault().register(content, (Callback.OnReloadListener) this::onNetReload);
+//            loadService = LoadSir.getDefault().register(content, (Callback.OnReloadListener) this::onNetReload);
         }
         setContentView(rootView);
         initNet();
         initView();
         initData();
-
     }
 
     protected abstract int getLayoutId();

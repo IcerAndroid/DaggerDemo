@@ -45,9 +45,6 @@ public class TodayFragment extends BaseFragment implements GankIoContract.View {
     private View mBottomSheetView;
     private TextView mBottomSheetTitle;
     private List<GankIoSection> data = new ArrayList<>();
-
-    //    private BottomSheetDialog mBottomSheetDialog;
-//    private BottomSheetAdapter mBottomSheetAdapter;
     @Inject
     TodayPresenter mPresenter;
     private TodayAdapter mAdapter;
@@ -74,7 +71,7 @@ public class TodayFragment extends BaseFragment implements GankIoContract.View {
 
     @Override
     protected void loadNet() {
-//        loadService.showCallback(LoadingCallback.class);
+        loadService.showCallback(LoadingCallback.class);
         mPresenter.getGankIoDayList();
     }
 
@@ -119,7 +116,7 @@ public class TodayFragment extends BaseFragment implements GankIoContract.View {
     }
 
     @Override
-    public void onResultGankIoList(List list) {
+    public void onResultGankIoList(List<GankIoSection> list) {
         closeSwipeRefreshLayout();
         mAdapter.setNewData(list);
         loadService.showCallback(SuccessCallback.class);

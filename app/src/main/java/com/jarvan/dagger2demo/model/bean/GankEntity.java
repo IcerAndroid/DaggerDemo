@@ -1,6 +1,9 @@
 package com.jarvan.dagger2demo.model.bean;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
+import com.jarvan.dagger2demo.util.EmptyUtils;
 
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class GankEntity {
     }
 
     public String getId() {
-        return id;
+        return EmptyUtils.checkString(id);
     }
 
     public void setId(String id) {

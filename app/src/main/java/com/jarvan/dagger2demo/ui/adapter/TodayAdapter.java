@@ -1,6 +1,7 @@
 package com.jarvan.dagger2demo.ui.adapter;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,7 +17,7 @@ import java.util.List;
  * 描述:
  * 作者:张冰
  */
-public class TodayAdapter extends BaseSectionQuickAdapter<GankIoSection,BaseViewHolder> {
+public class TodayAdapter extends BaseSectionQuickAdapter<GankIoSection, BaseViewHolder> {
 
     public TodayAdapter(List<GankIoSection> data) {
         super(R.layout.item_recycler_today_common, R.layout.item_recycler_today_title, data);
@@ -24,26 +25,28 @@ public class TodayAdapter extends BaseSectionQuickAdapter<GankIoSection,BaseView
 
     @Override
     protected void convertHead(BaseViewHolder helper, GankIoSection item) {
-        helper.setText(R.id.item_category,item.t.getCategory());
+        helper.setText(R.id.item_category, item.header);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, GankIoSection item) {
-        if(item.t.getType().equals("福利")){
-            helper.setVisible(R.id.item_rl_image,true);
+        if ("福利".equals(item.t.getType())) {
+            helper.setVisible(R.id.item_rl_image, true);
             Glide.with(mContext)
                     .load(item.t.getUrl())
                     .into((ImageView) helper.getView(R.id.item_gank_image));
-        }else{
-            helper.setVisible(R.id.item_rl_image,false);
+        } else {
+            helper.getView(R.id.item_rl_image).setVisibility(View.GONE);
         }
 
-        StringBuilder stringBuilder = new StringBuilder(item.t.getDesc());
-        final String who = item.t.getWho();
-        if (!TextUtils.isEmpty(who) && !"null".equals(who)) {
-            stringBuilder.append(String.format(" [%s]", who));
+        if (!TextUtils.isEmpty(item.t.getDesc())) {
+            StringBuilder stringBuilder = new StringBuilder(item.t.getDesc());
+            final String who = item.t.getWho();
+            if (!TextUtils.isEmpty(who) && !"null".equals(who)) {
+                stringBuilder.append(String.format(" [%s]", who));
+            }
+            helper.setText(R.id.item_gank_desc, stringBuilder.toString());
+            helper.setText(R.id.item_gank_image_desc, stringBuilder.toString());
         }
-        helper.setText(R.id.item_gank_desc, stringBuilder.toString());
-        helper.setText(R.id.item_gank_image_desc, stringBuilder.toString());
     }
 }

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.jarvan.dagger2demo.base.BaseEntity;
 import com.jarvan.dagger2demo.contract.GankIoContract;
 import com.jarvan.dagger2demo.model.bean.GankEntity;
+import com.jarvan.dagger2demo.model.bean.GankIoSection;
 import com.jarvan.dagger2demo.model.bean.TodayEntity;
 import com.jarvan.dagger2demo.model.network.GankService;
 import com.jarvan.dagger2demo.model.network.RxSchedulers;
@@ -115,7 +116,12 @@ public class TodayPresenter implements GankIoContract.Presenter {
                                 list.add(new GankEntity("拓展资源"));
                                 list.addAll(today.getExpandList());
                             }
-                            mView.onResultGankIoList(list);
+                            ArrayList<GankIoSection> sections=new ArrayList<>();
+                            for (GankEntity gankEntity : list) {
+                                GankIoSection section=new GankIoSection(gankEntity);
+                                sections.add(section);
+                            }
+                            mView.onResultGankIoList(sections);
                         }
                     }
                 }, new Consumer<Throwable>() {

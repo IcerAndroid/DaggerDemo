@@ -47,7 +47,6 @@ public class MainActivity extends BaseActivity {
         mToolbar = findViewById(R.id.toolbar);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mSelectedListener);
-
         setSupportActionBar(mToolbar);
         showFragment(0);
     }
