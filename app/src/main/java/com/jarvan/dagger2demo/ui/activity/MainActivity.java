@@ -1,28 +1,18 @@
 package com.jarvan.dagger2demo.ui.activity;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.jarvan.dagger2demo.R;
-import com.jarvan.dagger2demo.app.MyApplication;
 import com.jarvan.dagger2demo.base.BaseActivity;
 import com.jarvan.dagger2demo.ui.fragment.GankIoTabFragment;
-import com.jarvan.dagger2demo.ui.fragment.TodayFragment;
-
-import java.util.logging.Logger;
 
 public class MainActivity extends BaseActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
-    private TodayFragment mGankIoTabFragment;
+    private GankIoTabFragment mGankIoTabFragment;
     private Toolbar mToolbar;
     private BottomNavigationView.OnNavigationItemSelectedListener mSelectedListener =
             item -> {
@@ -83,7 +73,7 @@ public class MainActivity extends BaseActivity {
         switch (index) {
             case 0:
                 if (mGankIoTabFragment == null) {
-                    mGankIoTabFragment = new TodayFragment();
+                    mGankIoTabFragment = new GankIoTabFragment();
                     fragmentTransaction.replace(R.id.frame_layout, mGankIoTabFragment);
                 } else {
                     fragmentTransaction.show(mGankIoTabFragment);

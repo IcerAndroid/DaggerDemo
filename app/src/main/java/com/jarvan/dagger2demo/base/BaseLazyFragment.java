@@ -2,7 +2,10 @@ package com.jarvan.dagger2demo.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+
+import com.jarvan.dagger2demo.ui.fragment.TodayFragment;
 
 /**
  * 创建日期：2018/6/5 on 上午11:33
@@ -10,7 +13,7 @@ import android.view.View;
  * 作者:张冰
  */
 public abstract class BaseLazyFragment extends BaseFragment {
-
+    private static final String TAG = TodayFragment.class.getSimpleName();
     boolean isVisible = false;
     private boolean isPrepared = false;
     private boolean isFirst = true;
@@ -24,10 +27,22 @@ public abstract class BaseLazyFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(getUserVisibleHint()){
-            isVisible=true;
+        Log.d(TAG, "----------BaseLazyFragment:  onResume()-----getUserVisibleHint:  "+getUserVisibleHint() );
+        if (getUserVisibleHint()) {
+            setUserVisibleHint(true);
+        }
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(TAG, this.toString());
+        Log.d(TAG, "sVisibleToUser----" + isVisibleToUser);
+        if (getUserVisibleHint()) {
+            isVisible = true;
             lazyLoad();
-        }else {
+        } else {
             isVisible = false;
             onInvisible();
         }

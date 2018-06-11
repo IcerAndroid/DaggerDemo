@@ -39,14 +39,12 @@ public class TodayAdapter extends BaseSectionQuickAdapter<GankIoSection, BaseVie
             helper.getView(R.id.item_rl_image).setVisibility(View.GONE);
         }
 
-        if (!TextUtils.isEmpty(item.t.getDesc())) {
-            StringBuilder stringBuilder = new StringBuilder(item.t.getDesc());
-            final String who = item.t.getWho();
-            if (!TextUtils.isEmpty(who) && !"null".equals(who)) {
-                stringBuilder.append(String.format(" [%s]", who));
-            }
-            helper.setText(R.id.item_gank_desc, stringBuilder.toString());
-            helper.setText(R.id.item_gank_image_desc, stringBuilder.toString());
+        StringBuilder stringBuilder = new StringBuilder(item.t.getDesc());
+        final String who = item.t.getWho();
+        if (!TextUtils.isEmpty(who) && !"null".equals(who)) {
+            stringBuilder.append(String.format(" [%s]", who));
         }
+        helper.setText(R.id.item_gank_desc, stringBuilder.toString());
+        helper.setText(R.id.item_gank_image_desc, stringBuilder.toString());
     }
 }

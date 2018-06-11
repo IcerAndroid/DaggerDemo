@@ -51,7 +51,7 @@ public class GankEntity {
     }
 
     public String getDesc() {
-        return desc;
+        return EmptyUtils.checkString(desc);
     }
 
     public void setDesc(String desc) {

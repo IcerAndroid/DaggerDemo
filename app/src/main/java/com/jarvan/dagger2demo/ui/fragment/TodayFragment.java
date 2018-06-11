@@ -1,5 +1,6 @@
 package com.jarvan.dagger2demo.ui.fragment;
 
+import android.nfc.Tag;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +39,8 @@ import javax.inject.Inject;
  * 描述:
  * 作者:张冰
  */
-public class TodayFragment extends BaseFragment implements GankIoContract.View {
+public class TodayFragment extends BaseLazyFragment implements GankIoContract.View {
+    private static final String TAG = TodayFragment.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
@@ -60,13 +63,22 @@ public class TodayFragment extends BaseFragment implements GankIoContract.View {
     protected void initView(View view) {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-
         mFabHistory = (FloatingActionButton) view.findViewById(R.id.fab_history);
         mFabHistory.setVisibility(View.VISIBLE);
         DaggerGankIoComponent.builder()
                 .appComponent(MyApplication.getApplication().getAppComponent())
                 .gankModule(new GankModule(this))
                 .build().inject(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onInvisible() {
+
     }
 
     @Override
@@ -78,6 +90,7 @@ public class TodayFragment extends BaseFragment implements GankIoContract.View {
     @Override
     protected void initData() {
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            Log.d(TAG, "pull refresh ............");
             mPresenter.getGankIoDayList();
         });
 
@@ -143,4 +156,9 @@ public class TodayFragment extends BaseFragment implements GankIoContract.View {
             mSwipeRefreshLayout.setRefreshing(false);
         }
     }
+
+//    @Override
+//    protected void onInvisible() {
+//
+//    }
 }
